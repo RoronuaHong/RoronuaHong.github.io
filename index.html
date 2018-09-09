@@ -344,7 +344,83 @@
       
         
           
-            <h1 id="对React中的生命周期理解"><a href="#对React中的生命周期理解" class="headerlink" title="对React中的生命周期理解"></a>对React中的生命周期理解</h1>
+            <h1 id="对React中的生命周期理解"><a href="#对React中的生命周期理解" class="headerlink" title="对React中的生命周期理解"></a>对React中的生命周期理解</h1><blockquote>
+<p>1.constructor():</p>
+</blockquote>
+<p>存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。</p>
+<blockquote>
+<p>2.defaultProps:</p>
+</blockquote>
+<p>1.需要在component定义完之后才定义。</p>
+<p>2.定义为Component的属性，使用this.props进行调用。</p>
+<blockquote>
+<p>3.initialState:</p>
+</blockquote>
+<p>1.直接定义state，使用this.state.xxx进行调用(es7)。</p>
+<p>2.在constructor中使用this.state进行设置。</p>
+<blockquote>
+<p>4.static getDerivedStateFromProps(nextProps, prevState):</p>
+</blockquote>
+<p>1.在render前进行调用，触发该方法的条件是:</p>
+<pre><code>1.挂载时。
+2.接收到新的props。
+3.调用setState和forceUpdate。
+</code></pre><p>2.需要return object或null。</p>
+<p>3.在下列这些情况下不建议使用该方法:</p>
+<pre><code>1.执行副作用(data fetching或animation) - componentDidMount。
+2.当一个props改变时需要重新计算data - memoization helper。
+3.当一个props改变时不需要改变data：
+    1.fully controlled。
+    2.fully uncontrolled with a key。
+</code></pre><p>4.不能访问this。</p>
+<blockquote>
+<p>5.render():</p>
+</blockquote>
+<p>1.每个组件都必须有的方法。</p>
+<p>2.返回以下几种类型:</p>
+<pre><code>1.React Elements。(&lt;div /&gt; | &lt;Component /&gt;)。
+2.Array或Fragment。([] | &lt;Fragment&gt;&lt;/Fragment&gt;)
+3.Number或String，渲染成Text节点。
+4.Boolean或null，不渲染任何东西。
+5.Portals。(详情见React API)。
+</code></pre><blockquote>
+<p>6.componentDidMount():</p>
+</blockquote>
+<p>1.在组件挂在完成后调用，可以获取DOM节点进行操作，data fetching或者animation。</p>
+<p>2.如果订阅操作需要在ComponentWillUnmount中进行取消订阅操作。</p>
+<blockquote>
+<p>7.shouldComponentUpdate(nextProps, nextState):</p>
+</blockquote>
+<p>1.返回true时执行render方法，返回false时不执行render方法。</p>
+<p>2.在此处能进行性能优化。</p>
+<p>3.可以使用PureComponent进行替代。(shallow comparison)。</p>
+<blockquote>
+<p>8.getSnapshotBeforeUpdate(prevProps, prevState):</p>
+</blockquote>
+<p>1.在render之后，componentDidUpdate之前进行调用。</p>
+<p>2.有一个返回值object，不需要设置为null，作为第三个参数传入到componentDidUpdate(prevProps, prevState, snapshot)。</p>
+<blockquote>
+<p>9.componentWillUpdate(prevProps, prevState, snapshot):</p>
+</blockquote>
+<p>能够在此进行操作DOM，发起服务器请求，setState，但是一定要使用if控制，否则会造成无限循环。</p>
+<blockquote>
+<p>10.componentWillUnmount():</p>
+</blockquote>
+<p>1.清理定时器。</p>
+<p>2.取消网络请求。</p>
+<p>3.清除无效的DOM元素垃圾。</p>
+<h5 id="Mounting"><a href="#Mounting" class="headerlink" title="Mounting:"></a>Mounting:</h5><p>constructor()</p>
+<p>static getDeviedStateFromProps(nextProps, prevState)</p>
+<p>componentDidMount()</p>
+<p>render()</p>
+<h5 id="Updating"><a href="#Updating" class="headerlink" title="Updating:"></a>Updating:</h5><p>static getDeviedStateFromProps(nextProps, prevState)</p>
+<p>shouldComponentUpdate(nextProps, nextState)</p>
+<p>render()</p>
+<p>getSnapshotBeforeUpdate(prevProps, prevState)</p>
+<p>componentDidUpdate(prevProps, prevState)</p>
+<h5 id="Unmounting"><a href="#Unmounting" class="headerlink" title="Unmounting:"></a>Unmounting:</h5><p>componentWillUnmount()</p>
+<h5 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling:"></a>Error Handling:</h5><p>componentDidCatch(error, info)</p>
+
           
         
       
