@@ -648,6 +648,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/28/React知识点整理(三)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SlimHong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SlimHong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/28/React知识点整理(三)/" itemprop="url">React知识点整理（三）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T23:30:00+08:00">
+                2018-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="React的容器组件和展示组件"><a href="#React的容器组件和展示组件" class="headerlink" title="React的容器组件和展示组件"></a>React的容器组件和展示组件</h1><blockquote>
+<p>1.定义组件的三种方式</p>
+</blockquote>
+<ol>
+<li>完整组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Test extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Test;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>纯组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Test extend PureComponent &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Test;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>简易组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const Test = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.容器组件和展示组件</p>
+</blockquote>
+<ol>
+<li>容器组件<ol>
+<li>负责运作。</li>
+<li>可能包含子级展示组件和容器组件，一般不包含DOM标签(除了wrapping div)，不包含styles。</li>
+<li>提供数据和行为给其他展示组件和容器组件。</li>
+<li>调用状态管理工具(redux或flux)的actions作为展示组件的回调函数。</li>
+<li>维持许多状态变量，作为数据源。</li>
+<li>通常由高阶组件生成(redux的connect，Relay的createContainer)。</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li>展示组件<ol>
+<li>负责展示。</li>
+<li>可能同时包含子级展示组件和容器组件，一般含有DOM标签和自定的样式。</li>
+<li>通常用this.props.children来包含其他组件。</li>
+<li>不定义数据的读取和改变。</li>
+<li>不依赖状态管理工具(redux或flux)。</li>
+<li>只通过this.props接收数据和回调函数。</li>
+<li>只存在UI的状态变量(state)。</li>
+<li>一般是函数级组件，除非需要state，lifecycle，performance optimizations。</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>3.Component和PureComponent的区别</p>
+</blockquote>
+<pre><code>1. Component
+
+    存在shouldComponentUpdate(nextProps, nextState)。
+
+2. PureComponent
+
+    1. shouldComponentUpdate(nextProps, nextState)已经定义好了。
+
+    2. 只进行浅比较，无法比较Object和Array(通过返回新Object和Array来完成完成，或者使用immutable.js创建新对象)。
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/理解redux工作原理和源码/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1007,7 +1202,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
