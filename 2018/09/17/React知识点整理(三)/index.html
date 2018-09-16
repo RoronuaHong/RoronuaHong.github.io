@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="对React中的生命周期理解  1.constructor():  存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。  2.defaultProps:  1.需要在component定义完之后才定义。 2.定义为Component的属性，使用this.props进行调用。  3.initialState:  1.直接定义state，使用this.s">
+<meta name="description" content="React的容器组件和展示组件 1.定义组件的三种方式   完整组件  123456789class Test extends Component &amp;#123;    render() &amp;#123;        return (            &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;        )    &amp;#125;&amp;#125;export default Test;  纯组件">
 <meta name="keywords" content="React">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React知识点整理（二）">
-<meta property="og:url" content="http://yoursite.com/2018/09/09/React知识点整整理(二)/index.html">
+<meta property="og:title" content="React知识点整理（三）">
+<meta property="og:url" content="http://yoursite.com/2018/09/17/React知识点整理(三)/index.html">
 <meta property="og:site_name" content="SlimHong&#39;s Blog">
-<meta property="og:description" content="对React中的生命周期理解  1.constructor():  存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。  2.defaultProps:  1.需要在component定义完之后才定义。 2.定义为Component的属性，使用this.props进行调用。  3.initialState:  1.直接定义state，使用this.s">
+<meta property="og:description" content="React的容器组件和展示组件 1.定义组件的三种方式   完整组件  123456789class Test extends Component &amp;#123;    render() &amp;#123;        return (            &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;        )    &amp;#125;&amp;#125;export default Test;  纯组件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-09T14:44:05.374Z">
+<meta property="og:updated_time" content="2018-09-16T18:04:01.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React知识点整理（二）">
-<meta name="twitter:description" content="对React中的生命周期理解  1.constructor():  存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。  2.defaultProps:  1.需要在component定义完之后才定义。 2.定义为Component的属性，使用this.props进行调用。  3.initialState:  1.直接定义state，使用this.s">
+<meta name="twitter:title" content="React知识点整理（三）">
+<meta name="twitter:description" content="React的容器组件和展示组件 1.定义组件的三种方式   完整组件  123456789class Test extends Component &amp;#123;    render() &amp;#123;        return (            &amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;        )    &amp;#125;&amp;#125;export default Test;  纯组件">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/09/React知识点整整理(二)/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/17/React知识点整理(三)/"/>
 
 
 
 
 
-  <title>React知识点整理（二） | SlimHong's Blog</title>
+  <title>React知识点整理（三） | SlimHong's Blog</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/React知识点整整理(二)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/17/React知识点整理(三)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SlimHong">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React知识点整理（二）</h1>
+          <h1 class="post-title" itemprop="name headline">React知识点整理（三）</h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-09T23:30:00+08:00">
-                2018-09-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T01:30:00+08:00">
+                2018-09-17
               </time>
             
 
@@ -344,84 +344,61 @@
       
 
       
-        <h1 id="对React中的生命周期理解"><a href="#对React中的生命周期理解" class="headerlink" title="对React中的生命周期理解"></a>对React中的生命周期理解</h1><hr>
+        <h1 id="React的容器组件和展示组件"><a href="#React的容器组件和展示组件" class="headerlink" title="React的容器组件和展示组件"></a>React的容器组件和展示组件</h1><blockquote>
+<p>1.定义组件的三种方式</p>
+</blockquote>
+<ol>
+<li>完整组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Test extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Test;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>纯组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Test extend PureComponent &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Test;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>简易组件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const Test = () =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;&lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>1.constructor():</p>
+<p>2.容器组件和展示组件</p>
 </blockquote>
-<p>存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。</p>
+<ol>
+<li>容器组件<ol>
+<li>负责运作。</li>
+<li>可能包含子级展示组件和容器组件，一般不包含DOM标签(除了wrapping div)，不包含styles。</li>
+<li>提供数据和行为给其他展示组件和容器组件。</li>
+<li>调用状态管理工具(redux或flux)的actions作为展示组件的回调函数。</li>
+<li>维持许多状态变量，作为数据源。</li>
+<li>通常由高阶组件生成(redux的connect，Relay的createContainer)。</li>
+</ol>
+</li>
+</ol>
+<ol start="2">
+<li>展示组件<ol>
+<li>负责展示。</li>
+<li>可能同时包含子级展示组件和容器组件，一般含有DOM标签和自定的样式。</li>
+<li>通常用this.props.children来包含其他组件。</li>
+<li>不定义数据的读取和改变。</li>
+<li>不依赖状态管理工具(redux或flux)。</li>
+<li>只通过this.props接收数据和回调函数。</li>
+<li>只存在UI的状态变量(state)。</li>
+<li>一般是函数级组件，除非需要state，lifecycle，performance optimizations。</li>
+</ol>
+</li>
+</ol>
 <blockquote>
-<p>2.defaultProps:</p>
+<p>3.Component和PureComponent的区别</p>
 </blockquote>
-<p>1.需要在component定义完之后才定义。</p>
-<p>2.定义为Component的属性，使用this.props进行调用。</p>
-<blockquote>
-<p>3.initialState:</p>
-</blockquote>
-<p>1.直接定义state，使用this.state.xxx进行调用(es7)。</p>
-<p>2.在constructor中使用this.state进行设置。</p>
-<blockquote>
-<p>4.static getDerivedStateFromProps(nextProps, prevState):</p>
-</blockquote>
-<p>1.在render前进行调用，触发该方法的条件是:</p>
-<pre><code>1.挂载时。
-2.接收到新的props。
-3.调用setState和forceUpdate。
-</code></pre><p>2.需要return object或null。</p>
-<p>3.在下列这些情况下不建议使用该方法:</p>
-<pre><code>1.执行副作用(data fetching或animation) - componentDidMount。
-2.当一个props改变时需要重新计算data - memoization helper。
-3.当一个props改变时不需要改变data：
-    1.fully controlled。
-    2.fully uncontrolled with a key。
-</code></pre><p>4.不能访问this。</p>
-<blockquote>
-<p>5.render():</p>
-</blockquote>
-<p>1.每个组件都必须有的方法。</p>
-<p>2.返回以下几种类型:</p>
-<pre><code>1.React Elements。(&lt;div /&gt; | &lt;Component /&gt;)。
-2.Array或Fragment。([] | &lt;Fragment&gt;&lt;/Fragment&gt;)
-3.Number或String，渲染成Text节点。
-4.Boolean或null，不渲染任何东西。
-5.Portals。(详情见React API)。
-</code></pre><blockquote>
-<p>6.componentDidMount():</p>
-</blockquote>
-<p>1.在组件挂在完成后调用，可以获取DOM节点进行操作，data fetching或者animation。</p>
-<p>2.如果订阅操作需要在ComponentWillUnmount中进行取消订阅操作。</p>
-<blockquote>
-<p>7.shouldComponentUpdate(nextProps, nextState):</p>
-</blockquote>
-<p>1.返回true时执行render方法，返回false时不执行render方法。</p>
-<p>2.在此处能进行性能优化。</p>
-<p>3.可以使用PureComponent进行替代。(shallow comparison)。</p>
-<blockquote>
-<p>8.getSnapshotBeforeUpdate(prevProps, prevState):</p>
-</blockquote>
-<p>1.在render之后，componentDidUpdate之前进行调用。</p>
-<p>2.有一个返回值object，不需要设置为null，作为第三个参数传入到componentDidUpdate(prevProps, prevState, snapshot)。</p>
-<blockquote>
-<p>9.componentWillUpdate(prevProps, prevState, snapshot):</p>
-</blockquote>
-<p>能够在此进行操作DOM，发起服务器请求，setState，但是一定要使用if控制，否则会造成无限循环。</p>
-<blockquote>
-<p>10.componentWillUnmount():</p>
-</blockquote>
-<p>1.清理定时器。</p>
-<p>2.取消网络请求。</p>
-<p>3.清除无效的DOM元素垃圾。</p>
-<h5 id="Mounting"><a href="#Mounting" class="headerlink" title="Mounting:"></a>Mounting:</h5><p>constructor()</p>
-<p>static getDeviedStateFromProps(nextProps, prevState)</p>
-<p>componentDidMount()</p>
-<p>render()</p>
-<h5 id="Updating"><a href="#Updating" class="headerlink" title="Updating:"></a>Updating:</h5><p>static getDeviedStateFromProps(nextProps, prevState)</p>
-<p>shouldComponentUpdate(nextProps, nextState)</p>
-<p>render()</p>
-<p>getSnapshotBeforeUpdate(prevProps, prevState)</p>
-<p>componentDidUpdate(prevProps, prevState, snapshot)</p>
-<h5 id="Unmounting"><a href="#Unmounting" class="headerlink" title="Unmounting:"></a>Unmounting:</h5><p>componentWillUnmount()</p>
-<h5 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling:"></a>Error Handling:</h5><p>componentDidCatch(error, info)</p>
+<pre><code>1. Component
 
+    存在shouldComponentUpdate(nextProps, nextState)。
+
+2. PureComponent
+
+    1. shouldComponentUpdate(nextProps, nextState)已经定义好了。
+
+    2. 只进行浅比较，无法比较Object和Array(通过返回新Object和Array来完成完成，或者使用immutable.js创建新对象)。
+</code></pre>
       
     </div>
     
@@ -451,8 +428,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/28/React知识点整理(一)/" rel="next" title="React知识点整理（一）">
-                <i class="fa fa-chevron-left"></i> React知识点整理（一）
+              <a href="/2018/09/09/React知识点整整理(二)/" rel="next" title="React知识点整理（二）">
+                <i class="fa fa-chevron-left"></i> React知识点整理（二）
               </a>
             
           </div>
@@ -460,10 +437,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/17/React知识点整理(三)/" rel="prev" title="React知识点整理（三）">
-                React知识点整理（三） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -612,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#对React中的生命周期理解"><span class="nav-number">1.</span> <span class="nav-text">对React中的生命周期理解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Mounting"><span class="nav-number">1.0.0.0.1.</span> <span class="nav-text">Mounting:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Updating"><span class="nav-number">1.0.0.0.2.</span> <span class="nav-text">Updating:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Unmounting"><span class="nav-number">1.0.0.0.3.</span> <span class="nav-text">Unmounting:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Error-Handling"><span class="nav-number">1.0.0.0.4.</span> <span class="nav-text">Error Handling:</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React的容器组件和展示组件"><span class="nav-number">1.</span> <span class="nav-text">React的容器组件和展示组件</span></a></li></ol></div>
             
 
           </div>
