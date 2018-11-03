@@ -251,6 +251,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/27/React知识点整理(五)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="SlimHong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SlimHong's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/27/React知识点整理(五)/" itemprop="url">React知识点整理（五）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T22:30:00+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="React属性-—-ref和Forwarding-Refs"><a href="#React属性-—-ref和Forwarding-Refs" class="headerlink" title="React属性 — ref和Forwarding Refs"></a>React属性 — ref和Forwarding Refs</h1><blockquote>
+<p>1.Ref的定义</p>
+</blockquote>
+<p>提供一种访问DOM或React元素创建在渲染的组件，强制改变child。</p>
+<blockquote>
+<p>2.Ref的使用场景</p>
+</blockquote>
+<p>1.获取真实元素，比如：foucs，text selection，media playback。</p>
+<p>2.触发某些势在必行的动画。</p>
+<p>3.与第三方库集成。</p>
+<p>4.避免将Ref用于可以声明性完成的操作。</p>
+<blockquote>
+<p>3.使用的方式</p>
+</blockquote>
+<ol>
+<li>在constructor中声明this.myRef = React.createRef()，再将其绑入div中。</li>
+</ol>
+<pre><code>1. 当ref放在HTML中时，current收到的是当前元素以及当前元素下的DOM。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//能够在合成事件和原生事件中获取到，无法在render方法中获取到真实元素。</span><br><span class="line"></span><br><span class="line">import React, &#123; Component &#125; from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">class Refs extends Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super()</span><br><span class="line"></span><br><span class="line">        this.myRefs = React.createRef()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        console.log(this.myRefs.current)  // &lt;div&gt;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        console.log(this.myRefs.current)  // null</span><br><span class="line">        return (</span><br><span class="line">            &lt;div ref=&#123;this.myRefs&#125;&gt;12345&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Refs</span><br></pre></td></tr></table></figure>
+<pre><code>2. 当ref放在容器组件中时，current收到的是当前组件返回的实例对象，需要使用ReactDOM.findDOMNode()获取其具体元素。
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component, Fragment &#125; from &apos;react&apos;</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;</span><br><span class="line"></span><br><span class="line">class Refs extends Component &#123;</span><br><span class="line">    demoRefs = React.createRef()</span><br><span class="line">    fndemoRefs = React.createRef()</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        console.log(this.demoRefs.current)</span><br><span class="line">        console.log(this.fndemoRefs.current)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;Fragment&gt;</span><br><span class="line">                &lt;Demo ref=&#123;this.demoRefs&#125;/&gt;</span><br><span class="line">                &lt;Fndemo ref=&#123;this.fndemoRefs&#125;/&gt;</span><br><span class="line">            &lt;/Fragment&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Demo extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                1</span><br><span class="line">                &lt;div&gt;</span><br><span class="line">                    2</span><br><span class="line">                    &lt;div&gt;3&lt;/div&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const Fndemo = () =&gt; (</span><br><span class="line">    &lt;div&gt;4&lt;div&gt;5&lt;div&gt;6&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">export default Refs</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用callback Ref，将回调函数赋值给变量，存储其相应的元素,但是会被调用两次，第二次才是该元素。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component, Fragment &#125; from &apos;react&apos;</span><br><span class="line">import ReactDOM from &apos;react-dom&apos;</span><br><span class="line"></span><br><span class="line">class Refs extends Component &#123;</span><br><span class="line">    focusTextInput = () =&gt; &#123;</span><br><span class="line">        if(this.textInput) &#123;</span><br><span class="line">            this.textInput.focus()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        this.textInput.focus()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;Fragment&gt;</span><br><span class="line">                &lt;input type=&apos;text&apos; ref=&#123;el =&gt; this.textInput = el&#125;/&gt;</span><br><span class="line">                &lt;input type=&apos;button&apos; onClick=&#123;this.focusTextInput&#125;/&gt;</span><br><span class="line">            &lt;/Fragment&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Refs</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Forwarding Refs，通过使用React.ForwardRefs((props, ref) =&gt; (<div ref="{ref}">{props.children}</div>))创建组件，可以直接获取该组件的ref【常用于HOC】。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">//1. 普通DOM中</span><br><span class="line">import React, &#123; Component &#125; from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">class ForwardingRefs extends Component &#123;</span><br><span class="line">    btnRef = React.createRef()</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        console.log(this.btnRef.current)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;FancyButton ref=&#123;this.btnRef&#125;&gt;Click Me&lt;/FancyButton&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const FancyButton = React.forwardRef((props, ref) =&gt; (</span><br><span class="line">    &lt;button ref=&#123;ref&#125; className=&apos;FancyButton&apos;&gt;</span><br><span class="line">        &#123;props.children&#125;</span><br><span class="line">    &lt;/button&gt;</span><br><span class="line">))</span><br><span class="line"></span><br><span class="line">export default ForwardingRefs</span><br><span class="line"></span><br><span class="line">//2.HOC中(返回无状态组件)</span><br><span class="line">import React, &#123; Component &#125; from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">class Redpaint extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;123&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const PaintHOC = Component =&gt; React.forwardRef((props, ref) =&gt; </span><br><span class="line">    &lt;Component ref=&#123;ref&#125;&gt;&#123;props.children&#125;&lt;/Component&gt;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">const Paint = PaintHOC(Redpaint)</span><br><span class="line"></span><br><span class="line">export default Paint</span><br><span class="line"></span><br><span class="line">//3.HOC中(返回有状态组件)</span><br><span class="line">import React, &#123; Component &#125; from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">class Paint extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;444&lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const BigPaintHOC = Components =&gt; (() =&gt; &#123;</span><br><span class="line">    class WhatEver extends Component &#123;</span><br><span class="line">        render() &#123;</span><br><span class="line">            const &#123; textRef, ...props &#125; = this.props</span><br><span class="line">            return (</span><br><span class="line">                &lt;Components ref=&#123;textRef&#125;&gt;&lt;/Components&gt;</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const paintRef = React.forwardRef((props, ref) =&gt; (</span><br><span class="line">        &lt;WhatEver textRef=&#123;ref&#125;&gt;&lt;/WhatEver&gt;</span><br><span class="line">    ))</span><br><span class="line"></span><br><span class="line">    return paintRef</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">const BigPaint = BigPaintHOC(Paint)</span><br><span class="line"></span><br><span class="line">export default BigPaint</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/React知识点整理（四）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -603,7 +772,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/React知识点整整理(二)/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/React知识点整理(二)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="SlimHong">
@@ -622,7 +791,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/09/React知识点整整理(二)/" itemprop="url">React知识点整理（二）</a></h1>
+                <a class="post-title-link" href="/2018/09/09/React知识点整理(二)/" itemprop="url">React知识点整理（二）</a></h1>
         
 
         <div class="post-meta">
@@ -1359,7 +1528,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
