@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="SlimHong&#39;s Blog">
 <meta property="og:description" content="对React中的生命周期理解  1.constructor():  存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。  2.defaultProps:  1.需要在component定义完之后才定义。 2.定义为Component的属性，使用this.props进行调用。  3.initialState:  1.直接定义state，使用this.s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-24T04:32:50.783Z">
+<meta property="og:updated_time" content="2018-11-24T04:35:08.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React知识点整理（二）">
 <meta name="twitter:description" content="对React中的生命周期理解  1.constructor():  存在state，从父级继承props(需要调用super(props))，绑定方法的时候调用。  2.defaultProps:  1.需要在component定义完之后才定义。 2.定义为Component的属性，使用this.props进行调用。  3.initialState:  1.直接定义state，使用this.s">
@@ -401,9 +401,9 @@
 <p>1.在render之后，componentDidUpdate之前进行调用。</p>
 <p>2.有一个返回值object，不需要设置为null，作为第三个参数传入到componentDidUpdate(prevProps, prevState, snapshot)。</p>
 <blockquote>
-<p>9.componentWillUpdate(prevProps, prevState, snapshot):</p>
+<p>9.componentDidUpdate(prevProps, prevState, snapshot):</p>
 </blockquote>
-<p>能够在此进行操作DOM，发起服务器请求，setState，但是一定要使用if控制，否则会造成无限循环。</p>
+<p>能够在此进行操作DOM，发起服务器请求，setState，但是一定要使用if控制，否则会造成无限循环。</p>
 <blockquote>
 <p>10.componentWillUnmount():</p>
 </blockquote>

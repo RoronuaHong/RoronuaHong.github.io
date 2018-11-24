@@ -922,9 +922,9 @@
 <p>1.在render之后，componentDidUpdate之前进行调用。</p>
 <p>2.有一个返回值object，不需要设置为null，作为第三个参数传入到componentDidUpdate(prevProps, prevState, snapshot)。</p>
 <blockquote>
-<p>9.componentWillUpdate(prevProps, prevState, snapshot):</p>
+<p>9.componentDidUpdate(prevProps, prevState, snapshot):</p>
 </blockquote>
-<p>能够在此进行操作DOM，发起服务器请求，setState，但是一定要使用if控制，否则会造成无限循环。</p>
+<p>能够在此进行操作DOM，发起服务器请求，setState，但是一定要使用if控制，否则会造成无限循环。</p>
 <blockquote>
 <p>10.componentWillUnmount():</p>
 </blockquote>
